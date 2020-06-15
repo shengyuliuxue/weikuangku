@@ -1,11 +1,12 @@
 from flask import Flask
 import pymysql.cursors
+from monitoring.map import bp
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3306/{DB_NAME}'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pmysql://root:sy123456@localhost:3306/mydb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-
+app.register_blueprint(bp)
 
 
 @app.route('/')
@@ -24,7 +25,7 @@ def hello():
             cursor.execute(sql)
             result = cursor.fetchall()
             print(result[0])
-            return result[0]
+
     finally:
         connection.close()
 
