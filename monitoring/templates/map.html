@@ -4,11 +4,14 @@
         target: 'map',
         layers: [
           new ol.layer.Tile({
-            source: new ol.source.OSM()
+                source: new ol.source.XYZ({
+                        url: 'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'
+                        }),
+                projection: 'EPSG:3857'
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
+          center: ol.proj.fromLonLat([114.79, 31.91]),
           zoom: 4
         })
       });
