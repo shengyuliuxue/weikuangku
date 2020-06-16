@@ -1,5 +1,6 @@
-<div id="map" class="map">
+
       <script type="text/javascript">
+       var wangjiaping = ol.proj.fromLonLat([110.01, 34.24]);
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -11,9 +12,26 @@
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([114.79, 31.91]),
-          zoom: 4
+          center: ol.proj.fromLonLat([{{ longtitude }}, {{ latitude }}]),
+          zoom: 8
         })
       });
+
+
+      var marker = new ol.Overlay({
+        position: wangjiaping,
+        positioning:'center-center',
+        element: document.getElementById('marker'),
+        stopEvent:flase
+      });
+      marker.getElement().title="王家坪尾矿库";
+      map.addOverlay(marker);
+
+    var text = new ol.Overlay({
+        position: wangjiaping,
+        element: document.getElementById('address')
+    });
+    map.addOverlay(text);
+    text.getElement().innerText = marker.getElement().title;
     </script>
-</div>
+

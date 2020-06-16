@@ -5,19 +5,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
     <style>
-      #map {
-        height: 700px;
-        width: 100%;
-      }
+      	#map {
+			height: 500px;
+			width: 100%;
+		}
+        .marker
+        {
+            width:20px;
+            height:20px;
+            border:1px solid #088;
+            border-radius:10px;
+            background-color:#0FF;
+            opacity:0.5;
+        }
       body{
         background-image: {{ url_for('static', filename='bg01.png') }};
       }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <title>陕西有色尾矿库安全监测信息平台</title>
 </head>
 <body background="{{ url_for('static', filename='bg01.png') }}">
-<div >
+
 <div class="index_nav">
     <ul style="height:65px; margin-bottom:0px;">
         <li class="l_left "> 监测一张图</li>
@@ -26,11 +36,57 @@
         </li>
     </ul>
 </div>
-<div class="index_tabs">
+    <div id="map"></div>
+    <div id="overlay">
+        <div id="label">
+            <div id="marker" class="marker"></div>
+            <a class="address" target="_blank" id="address">标注点
+        </a>
+        </div>
+    </div>
 
-        {% include 'map.html' %}
 
-</div>
-</div>
+
+
+      <script type="text/javascript">
+      var wangjiaping = ol.proj.fromLonLat([110.01, 34.24]);
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                        url: 'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'
+                        }),
+                projection: 'EPSG:3857'
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([{{ longtitude }}, {{ latitude }}]),
+          zoom: 8
+        })
+      });
+
+
+      var marker = new ol.Overlay({
+        position: wangjiaping,
+        positioning:'center-center',
+        element: document.getElementById('marker'),
+        stopEvent:false
+      });
+
+      map.addOverlay(marker);
+      marker.getElement().title="王家坪尾矿库";
+
+    var text = new ol.Overlay({
+        position: wangjiaping,
+        element: document.getElementById('address')
+    });
+    map.addOverlay(text);
+    text.getElement().innerText = marker.getElement().title;
+    </script>
+
+
+
+
 </body>
 </html>
