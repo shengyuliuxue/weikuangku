@@ -1,0 +1,13 @@
+.index_nav li{
+list-style: none;
+color: white;
+}
+
+.index_nav {
+display: block;
+
+}
+
+body{
+    font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+}

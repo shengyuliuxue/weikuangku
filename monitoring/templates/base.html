@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
     <style>
       #map {
-        height: 400px;
+        height: 700px;
         width: 100%;
+      }
+      body{
+        background-image: {{ url_for('static', filename='bg01.png') }};
       }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <title>陕西有色尾矿库安全监测信息平台</title>
 </head>
-<body>
+<body background="{{ url_for('static', filename='bg01.png') }}">
+<div >
+<div class="index_nav">
+    <ul style="height:65px; margin-bottom:0px;">
+        <li class="l_left "> 监测一张图</li>
+        <li class="l_right">
+            <span id="time">2020年6月16日  星期二  10:42:56</span>
+        </li>
+    </ul>
+</div>
+<div class="index_tabs">
 
-{% include 'map.html' %}
+        {% include 'map.html' %}
 
+</div>
+</div>
 </body>
 </html>
