@@ -8,9 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pmysql://root:sy123456@localhost:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(bp)
 
-@app.route('/')
-def index():
-    return render_template('base.html')
+
 
 
 if __name__ == "__main__":

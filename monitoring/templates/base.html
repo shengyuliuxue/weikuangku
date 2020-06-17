@@ -5,11 +5,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
     <style>
-      	#map {
-			height: 500px;
-			width: 100%;
-		}
-        .marker
+      #map {
+        height: 700px;
+        width: 100%;
+      }
+
+      .marker
         {
             width:20px;
             height:20px;
@@ -18,9 +19,21 @@
             background-color:#0FF;
             opacity:0.5;
         }
+        .address
+        {
+            text-decoration:none;
+            color:#aa3300;
+            font-size:14px;
+            font-weight:bold;
+            text-shadow:black 0.1em 0.1em 0.2em;
+        }
+
+
       body{
         background-image: {{ url_for('static', filename='bg01.png') }};
       }
+
+
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
