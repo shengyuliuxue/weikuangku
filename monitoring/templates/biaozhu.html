@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<input type="radio" id="addFeatures" name="cluster"/>添加聚合标注
+<input type="radio" id="removeFeatures" name="cluster"/>移除聚合标注
+<div id="map"></div>
+
+<script>
+    var map = new ol.Map({
+       target:'map',
+       layers:[
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+       ],
+       view: new ol.View({
+            center:[0,0],
+            zoom:3
+       })
+    });
+
+    //创建10000个要素
+    var count=10000;
+    var features = new Array(count);
+    var e = 4500000;
+    for(var i=0, i < count; i++){
+        var coordinates = 2*e*Math.random()-e, 2*e*Math.random()-e];
+        features[i] = new ol.Feature(
+            new ol.geom.Point(coordinates)
+        );
+    }
+
+    var source = new ol.source.Vector({
+        features: features
+    });
+
+    var clusterSource = new ol.source.Cluster({
+        features: features
+    });
+
+    var cluserSource = new ol.source.Cluster({
+        distance:40,
+        source: source
+    });
+
+    var styleCache = {};
+    var clusters = new ol.layer.Vector({
+        source: clusterSource,
+        style: function(feature, resolution){
+            var size = feature.get('features').length;
+            var style = styleCache[size];
+            console.log(size);
+            if(!style){
+                style = [
+                    new ol.style.Style(
+                        {
+                            image: new ol.style.Circle({
+                                radius:10,
+                                stroke: new ol.style.Stroke({
+                                    color: '#fff'
+                                }),
+                                fill: new ol.style.Fill({
+                                    color: '#3399CC'
+                                })
+                            }),
+                            text: new ol.style.Text({
+                                text: size.toString(),
+                                fill: new ol.style.Fill({
+                                    color:'#fff'
+                                })
+                            })
+                        }
+                    )
+                ];
+                styleCache[size] = style;
+            }
+            return style;
+        }
+    });
+
+    map.addLayer(clusters);
+
+    document.getElementById('addFeatures').onclick = function(){
+        var currentFeatures = clusterSource.getSource().getFeatures();
+        if (currentFeatures.length==0){
+            clusterSource.getSource().addFeatures(features);
+            clusters.setSource(clusterSource);
+            map.addLayer(clusters);
+        }
+    }
+
+    document.getElementById('removeFeatures').onclick = function(){
+        clusterSource.getSource().clear();
+        map.removeLayer(clusters);
+    }
+
+
+
+</script>
+
+</body>
+</html>

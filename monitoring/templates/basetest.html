@@ -22,7 +22,7 @@
         .address
         {
             text-decoration:none;
-            color:#aa3300;
+            color:blue;
             font-size:14px;
             font-weight:bold;
             text-shadow:black 0.1em 0.1em 0.2em;
@@ -39,8 +39,13 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <title>陕西有色尾矿库安全监测信息平台</title>
 </head>
-<body background="{{ url_for('static', filename='bg01.png') }}">
-
+<body>
+{% for i in data %}
+<div>
+    {{i}}
+</div>
+{% endfor %}
+<div id="map_out">
 <div class="index_nav">
     <ul style="height:65px; margin-bottom:0px;">
         <li class="l_left "> 监测一张图</li>
@@ -75,7 +80,7 @@
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([{{ longtitude }}, {{ latitude }}]),
+          center: wangjiaping,
           zoom: 8
         })
       });
@@ -97,10 +102,33 @@
     });
     map.addOverlay(text);
     text.getElement().innerText = marker.getElement().title;
+
+    function addPoint(long, lat){
+        var point = ol.proj.fromLonLat([long, lat]);
+        var marker = new ol.Overlay({
+            position: point,
+            positioning:'center-center',
+            element: document.getElementById('marker'),
+            stopEvent:false
+        });
+        map.addOverlay(marker);
+        marker.getElement().title='一期尾矿库';
+
+        var text = new ol.Overlay({
+            position: point,
+            element: document.getElementById('address')
+        });
+        map.addOverlay(text);
+        text.getElement().innerText = marker.getElement().title;
+
+    }
+
+    addPoint(107.523, 23.4087);
+
+
+
     </script>
 
-
-
-
+</div>
 </body>
 </html>
