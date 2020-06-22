@@ -6,7 +6,7 @@ bp = Blueprint('/map', __name__, url_prefix='/map')
 def dataConnect(query):
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='sy123456',
+                                 password='shengyu1987',
                                  db='mydb',
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -31,4 +31,7 @@ def map():
     return render_template('basetest.html', data=data)
     #return render_template('modal.html')
 
+@bp.route('/ajaxtest', methods=('GET', 'POST'))
+def ajaxtest():
+    return  'hello ajax test!'
 
