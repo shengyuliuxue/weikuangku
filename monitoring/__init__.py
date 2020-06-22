@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for,render_template
+from flask import Flask, redirect, url_for, render_template
 import pymysql.cursors
 from monitoring.map import bp
 
