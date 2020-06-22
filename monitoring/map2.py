@@ -28,4 +28,4 @@ def map():
     data = dataConnect(query)
     longtitude = data[0]['longtitude']
     latitude = data[0]['latitude']
-    return render_template('base.html', longtitude=longtitude, latitude=latitude)
+    return render_template('modal.html')

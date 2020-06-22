@@ -29,5 +29,6 @@ def map():
     #longtitude = data[0]['longtitude']
     #latitude = data[0]['latitude']
     return render_template('basetest.html', data=data)
+    #return render_template('modal.html')
 
 
