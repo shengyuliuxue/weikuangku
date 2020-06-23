@@ -1,0 +1,65 @@
+<div id="kudata">
+    <div class="main">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#jiance">监测数据</a></li>
+            <li><a data-toggle="tab" href="#shixu">时序曲线</a></li>
+            <li><a data-toggle="tab" href="#diejia">叠加曲线</a></li>
+            <li><a data-toggle="tab" href="#shuju">数据对比</a></li>
+            <li><a data-toggle="tab" href="#yujinglishi">预警历史</a></li>
+            <li><a data-toggle="tab" href="#yuzhi">预警阈值</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="jiance" class="tab-pane fade in active">
+                <h3>监测数据标题</h3>
+                <p>监测数据内容</p>
+            </div>
+            <div id="shixu" class="tab-pane fade">
+                <h3>时序曲线标题</h3>
+                <p>时序曲线内容</p>
+            </div>
+            <div id="diejia" class="tab-pane fade">
+                <h3>叠加曲线</h3>
+                <p>叠加曲线内容</p>
+            </div>
+            <div id="shuju" class="tab-pane fade">
+                <h3>数据对比</h3>
+                <p>数据对比内容</p>
+            </div>
+            <div id="yujinglishi" class="tab-pane fade">
+                <h3>预警历史</h3>
+                <p>预警历史数据</p>
+            </div>
+            <div id="yuzhi" class="tab-pane fade">
+                <h3>预警阈值</h3>
+                <p>预警阈值内容</p>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>监测点编号</th>
+                <th>监测点名称</th>
+                <th>状态</th>
+                <th>类型</th>
+                <th>经度</th>
+                <th>纬度</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for dian in kudata %}
+                <tr>
+                    <td>{{ dian.dianId }}</td>
+                    <td>{{ dian.dianName }}</td>
+                    <td>{{ dian.status }}</td>
+                    <td>{{ dian.type }}</td>
+                    <td>{{ dian.longitude }}</td>
+                    <td>{{ dian.latitude }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

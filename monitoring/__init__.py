@@ -7,7 +7,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(bp)
 
-
+@app.route('/')
+def index():
+    return redirect(url_for('/map.map'))
 
 
 if __name__ == "__main__":

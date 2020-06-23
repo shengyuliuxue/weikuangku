@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 import pymysql.cursors
 
 bp = Blueprint('/map', __name__, url_prefix='/map')
@@ -6,7 +6,7 @@ bp = Blueprint('/map', __name__, url_prefix='/map')
 def dataConnect(query):
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='shengyu1987',
+                                 password='sy123456',
                                  db='mydb',
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -16,7 +16,7 @@ def dataConnect(query):
             #sql = "SELECT * FROM kudata"
             cursor.execute(query)
             result = cursor.fetchall()
-            print(result)
+            #print(result)
             return result
     finally:
         connection.close()
@@ -33,5 +33,12 @@ def map():
 
 @bp.route('/ajaxtest', methods=('GET', 'POST'))
 def ajaxtest():
-    return  'hello ajax test!'
+    kuname = request.args.get('kuname')
+    query = 'select * from diandata where kuId=1'
+    #print (query)
+    result = dataConnect(query)
+    print(result)
+
+    return  render_template('kudata.html', kudata=result)
+
 

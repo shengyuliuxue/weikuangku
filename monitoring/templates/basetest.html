@@ -45,11 +45,7 @@
     <title>陕西有色尾矿库安全监测信息平台</title>
 </head>
 <body>
-{% for i in data %}
-<div>
-    {{i}}
-</div>
-{% endfor %}
+
 <div id="map_out">
 <div class="index_nav">
     <ul style="height:65px; margin-bottom:0px;">
@@ -74,7 +70,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -173,10 +169,12 @@
 
     $(function(){
         $('.marker').on('click', function(){
+            kuname = this.title;
             $.ajax({
                 url: "{{ url_for('/map.ajaxtest') }}",
+                data:{ kuname: kuname },
                 success: function(result){
-                    $('.modal-body').text(" hello  ");
+                    $('.modal-body').html(result);
                 }
             });
             $('#exampleModal').modal('toggle');
