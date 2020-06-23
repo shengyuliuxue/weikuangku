@@ -30,3 +30,30 @@ body{
    font-weight:bold;
    text-shadow:black 0.1em 0.1em 0.2em;
 }
+
+table tbody {
+    display: block;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+table thead,
+table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /**表格列的宽度由表格宽度决定，不由内容决定*/
+    text-align: center;
+}
+
+thead th,
+tbody td {
+    width: 50px;
+}
+
+table thead {
+    width: calc( 100% - 1em);/*表头与表格垂直对齐*/
+}
+.customer-container {
+    height: 500px;
+    overflow-y: auto;
+}
