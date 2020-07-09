@@ -6,45 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
+    <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <style>
-      #map {
-        height: 700px;
-        width: 100%;
-      }
-
-      .marker
-        {
-            width:20px;
-            height:20px;
-            border:1px solid #088;
-            border-radius:10px;
-            background-color:#0FF;
-            opacity:0.5;
-        }
-        .address
-        {
-            text-decoration:none;
-            color:blue;
-            font-size:14px;
-            font-weight:bold;
-            text-shadow:black 0.1em 0.1em 0.2em;
-        }
-
-
-      body{
-        background-image: {{ url_for('static', filename='bg01.png') }};
-      }
-
-
-    </style>
-
-
     <title>陕西有色尾矿库安全监测信息平台</title>
 </head>
 <body>
+
 
 <div id="map_out">
 <div class="index_nav">
@@ -55,135 +24,15 @@
         </li>
     </ul>
 </div>
-    <div id="map"></div>
-    <div id="overlay">
-        <div id="label">
-            <div id="marker" class="marker"></div>
-            <a class="address" target="_blank" id="address">标注点
-        </a>
-        </div>
+<div id="container">
+    <div id="container-left">
+        {% include 'left.html' %}
     </div>
-
-
-        <!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div id="container-right">
+        {% include 'right.html' %}
     </div>
-  </div>
 </div>
-
-
-      <script type="text/javascript">
-
-      var wangjiaping = ol.proj.fromLonLat([110.01, 34.24]);
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-                source: new ol.source.XYZ({
-                        url: 'http://mt2.google.cn/vt/lyrs=y&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=G'
-                        }),
-                projection: 'EPSG:3857'
-          })
-        ],
-        view: new ol.View({
-          center: wangjiaping,
-          zoom: 8
-        })
-      });
-
-
-      var marker = new ol.Overlay({
-        position: wangjiaping,
-        positioning:'center-center',
-        element: document.getElementById('marker'),
-        stopEvent:false
-      });
-
-      map.addOverlay(marker);
-      marker.getElement().title="王家坪尾矿库";
-
-    var text = new ol.Overlay({
-        position: wangjiaping,
-        element: document.getElementById('address')
-    });
-    map.addOverlay(text);
-    text.getElement().innerText = marker.getElement().title;
-
-    function addPoint(long, lat, name){
-
-        var point = ol.proj.fromLonLat([long, lat]);
-        //新增div元素
-        var elementDiv = document.createElement('div');
-        elementDiv.className = 'marker';
-        elementDiv.title = name;
-        var overlay = document.getElementById('label');
-        overlay.appendChild(elementDiv);
-        //设置a元素
-        var elementA = document.createElement("a");
-        elementA.className = "address";
-        elementA.href = '#';
-
-
-        elementA.innerText = elementDiv.title;
-
-        elementDiv.appendChild(elementA);
-
-        var newMarker = new ol.Overlay({
-            position: point,
-            positioning:'center-center',
-            element: elementDiv,
-            stopEvent:false
-        });
-        map.addOverlay(newMarker);
-        newMarker.getElement().title= name;
-
-        var newText = new ol.Overlay({
-            position: point,
-            element: elementA
-        });
-        map.addOverlay(newText);
-
-
-    }
-
-    addPoint(107.523, 23.4087,'一期尾矿库');
-    addPoint(112.39, 33.9827,'泉水沟尾矿库');
-
-    $(function(){
-        $('.marker').on('click', function(){
-            kuname = this.title;
-            $.ajax({
-                url: "{{ url_for('/map.ajaxtest') }}",
-                data:{ kuname: kuname },
-                success: function(result){
-                    $('.modal-body').html(result);
-                }
-            });
-            $('#exampleModal').modal('toggle');
-        });
-    });
-
-
-    </script>
-
 </div>
+<script src="{{ url_for('static', filename='start.js') }}"></script>
 </body>
 </html>
