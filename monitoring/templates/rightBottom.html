@@ -1,0 +1,24 @@
+<div id="rightbottom">
+    <table class="right-bottom">
+        <tr>
+            <th>集团名称</th>
+            <th>权属单位</th>
+            <th>监测对象</th>
+            <th>状态</th>
+            <th>责任人</th>
+            <th>联系电话</th>
+            <th>操作</th>
+        </tr>
+        {% for ku in data %}
+        <tr>
+            <td>{{ ku.jituan }}</td>
+             <td>{{ ku.company }}</td>
+             <td>{{ ku.kuname }}</td>
+             <td>{{ ku.status }}</td>
+             <td>{{ ku.man }}</td>
+             <td>{{ ku.phone }}</td>
+              <td>{{ ku.caozuo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

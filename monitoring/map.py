@@ -29,7 +29,7 @@ def map():
     #longtitude = data[0]['longtitude']
     #latitude = data[0]['latitude']
     return render_template('basetest.html', data=data)
-    #return render_template('modal.html')
+    #return render_template('echart_test.html')
 
 @bp.route('/ajaxtest', methods=('GET', 'POST'))
 def ajaxtest():
@@ -39,6 +39,10 @@ def ajaxtest():
     result = dataConnect(query)
     print(result)
 
-    return  render_template('kudata.html', kudata=result)
+    return render_template('kudata.html', kudata=result)
 
-
+@bp.route('/status', methods=('GET', 'POST'))
+def status():
+    query = 'select * from kudata'
+    result = dataConnect(query)
+    return render_template('rightBottom.html', data=result)

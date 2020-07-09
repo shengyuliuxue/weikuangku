@@ -1,0 +1,26 @@
+<div id="right-top">
+            {% include 'map.html' %}
+</div>
+<div id="right-bottom">
+    <div class="map-title">
+        尾矿库监测状态
+    </div>
+    <div class="status">
+        <div id="status-head">
+
+        </div>
+        <div id="status-body">
+
+        </div>
+        <script type="text/javascript">
+                    $(function(){
+                        $.ajax({
+                            url:"{{ url_for('/map.status') }}",
+                            success: function(data){
+                                $('#status-body').html(data);
+                            }
+                        });
+                    });
+                </script>
+    </div>
+</div>

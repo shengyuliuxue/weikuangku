@@ -31,29 +31,99 @@ body{
    text-shadow:black 0.1em 0.1em 0.2em;
 }
 
-table tbody {
-    display: block;
-    height: 200px;
+.custom-container{
+    height:550px;
     overflow-y: scroll;
 }
 
-table thead,
-table tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed; /**表格列的宽度由表格宽度决定，不由内容决定*/
-    text-align: center;
+#container {
+   height: 700px;
+   width: 100%;
 }
 
-thead th,
-tbody td {
-    width: 50px;
+#map{
+    height:100%;
+    width:100%;
+
 }
 
-table thead {
-    width: calc( 100% - 1em);/*表头与表格垂直对齐*/
+.marker
+ {
+     width:20px;
+     height:20px;
+     border:1px solid #088;
+     border-radius:10px;
+     background-color:#0FF;
+     opacity:0.5;
 }
-.customer-container {
-    height: 500px;
-    overflow-y: auto;
+        .address
+        {
+            text-decoration:none;
+            color:red;
+            font-size:14px;
+            font-weight:bold;
+            text-shadow:black 0.1em 0.1em 0.2em;
+        }
+
+
+      body{
+        background-image: {{ url_for('static', filename='bg01.png') }};
+      }
+
+
+#container-left{
+    width:30%;
+    height:100%;
+
+    float:left;
+}
+
+#container-right{
+    width:70%;
+    height:100%;
+
+    float:right;
+}
+
+#left-top{
+    width:100%;
+    height:30%;
+    background:blue;
+}
+
+#left-center{
+    width:100%;
+    height:35%;
+    background:green;
+}
+
+#left-bottom{
+    width:100%;
+    height:35%;
+    background:yellow;
+}
+
+#chart{
+height:50%;
+width:100%;
+}
+
+#right-top{
+    height:65%;
+    width:100%;
+}
+
+#right-bottom{
+    height:35%;
+    width:100%;
+}
+
+table{
+    border-collapse: separate;
+    border-spacing: 20px 20px;
+}
+
+table tr td
+{
+     background-color: green;
 }
