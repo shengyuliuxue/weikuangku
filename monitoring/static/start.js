@@ -14,6 +14,7 @@
         view: new ol.View({
           center: wangjiaping,
           zoom: 8
+
         })
       });
 
@@ -74,6 +75,21 @@
 
     addPoint(107.523, 23.4087,'一期尾矿库');
     addPoint(112.39, 33.9827,'泉水沟尾矿库');
+    //自适应
+    var coordinatesPolygon = new Array();
+    coordinatesPolygon.push([107.523, 23.4087]);
+    coordinatesPolygon.push([112.39, 33.9827]);
+    coordinatesPolygon.push([110.017,34.2352]);
+    var polygon = new ol.geom.Polygon([coordinatesPolygon]);
+    polygon.applyTransform(ol.proj.getTransform('EPSG:4326', 'EPSG:3857'));
+    map.getView().fit(polygon, map.getSize());
+
+
+//    let view = map.getView();
+//    let extent = view.calculateExtent(map.getSize());
+
+//    var extent=[12665080.52765571, 2550703.6338763316, 12725465.780000998, 2601457.820657688];
+//    map.getView().fit(extent, map.getSize());
 
     $(function(){
         $('.marker').on('click', function(){
