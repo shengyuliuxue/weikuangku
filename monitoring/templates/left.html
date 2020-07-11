@@ -1,0 +1,40 @@
+<div id="left-top">
+    <div class="left-content">
+        陕西有色尾矿库安全监测信息平台：
+系统设计总目标为建立尾矿库全过程安全环境在线监测监控系统和综合的安全环境信息管理平台，实现对尾矿库重要运行数据的实时采集、传输、计算、分析，包括库区降雨量、坝体位移、坝体浸润线以及大坝视频监控等，提高矿山企业安全防范水平。
+    </div>
+</div>
+
+<div id="left-center">
+
+    <div id="chart">
+        <script type="text/javascript">
+            var chart = echarts.init(document.getElementById('chart'));
+            $(function(){
+            option={
+                legend:{ data:['正常数', '预警数'] },
+                series:[
+                    {
+                        type:'pie',
+                        radius:['50%', '70%'],
+                        data:[
+                            {value:2, name:'正常数'},
+                            {value:1, name:'预警数'},
+                        ]
+                    }
+                ]
+
+            }
+
+            chart.setOption(option);
+            })
+        </script>
+
+    </div>
+
+</div>
+
+<div id="left-bottom">
+    left-bottom
+    hello left
+</div>
