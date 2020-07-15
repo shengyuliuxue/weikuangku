@@ -1,5 +1,5 @@
 
-
+      var basepath = 'http://127.0.0.1:5000';
       var wangjiaping = ol.proj.fromLonLat([110.01, 34.24]);
       var map = new ol.Map({
         target: 'map',
@@ -33,6 +33,7 @@
         position: wangjiaping,
         element: document.getElementById('address')
     });
+    text.element.innerText='王家坪尾矿库';
     map.addOverlay(text);
 
 
@@ -73,6 +74,7 @@
 
     }
 
+    //addPoint(110.017,34.2352,'王家坪尾矿库');
     addPoint(107.523, 23.4087,'一期尾矿库');
     addPoint(112.39, 33.9827,'泉水沟尾矿库');
     //自适应
@@ -85,6 +87,17 @@
     map.getView().fit(polygon, map.getSize());
 
 
+//    map.on('click', function(e){
+//        var featureA = map.getFeaturesAtPixel(e.pixel);
+//        if ( featureA != null ){
+//            alert(featureA[0]);
+//            print(featureA[0]);
+//        }
+//    });
+
+
+
+
 //    let view = map.getView();
 //    let extent = view.calculateExtent(map.getSize());
 
@@ -95,7 +108,7 @@
         $('.marker').on('click', function(){
             kuname = this.title;
             $.ajax({
-                url: "{{ url_for('/map.ajaxtest') }}",
+                url: basepath+'/map/ajaxtest',
                 data:{ kuname: kuname },
                 success: function(result){
                     $('.modal-body').html(result);
@@ -104,5 +117,19 @@
             $('#exampleModal').modal('toggle');
         });
     });
-
-
+//
+//$(function(){
+//    $('.marker').on('click', function(){
+//        var kuname = this.title;
+//        var x = map.getOverlays();
+//        x.clear();
+//        $.ajax({
+//            url: basepath+'/map.kuPoints',
+//            data: { kuname: kuname},
+//            success: function(points){
+//                alert(points);
+//            }
+//        });
+//
+//    })
+//})

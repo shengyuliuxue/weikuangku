@@ -6,7 +6,7 @@ bp = Blueprint('/map', __name__, url_prefix='/map')
 def dataConnect(query):
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='shengyu1987',
+                                 password='sy741852963',
                                  db='mydb',
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -46,3 +46,10 @@ def status():
     query = 'select * from kudata'
     result = dataConnect(query)
     return render_template('rightBottom.html', data=result)
+
+@bp.route('/kuPoints', methods=('GET', 'POST'))
+def kuPoints():
+    kuname = request.args.get('kuname')
+    query = 'select * from diandata'
+    result = dataConnect(query)
+    return result
