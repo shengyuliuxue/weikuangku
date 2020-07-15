@@ -104,32 +104,32 @@
 //    var extent=[12665080.52765571, 2550703.6338763316, 12725465.780000998, 2601457.820657688];
 //    map.getView().fit(extent, map.getSize());
 
-    $(function(){
-        $('.marker').on('click', function(){
-            kuname = this.title;
-            $.ajax({
-                url: basepath+'/map/ajaxtest',
-                data:{ kuname: kuname },
-                success: function(result){
-                    $('.modal-body').html(result);
-                }
-            });
-            $('#exampleModal').modal('toggle');
-        });
-    });
-//
-//$(function(){
-//    $('.marker').on('click', function(){
-//        var kuname = this.title;
-//        var x = map.getOverlays();
-//        x.clear();
-//        $.ajax({
-//            url: basepath+'/map.kuPoints',
-//            data: { kuname: kuname},
-//            success: function(points){
-//                alert(points);
-//            }
+//    $(function(){
+//        $('.marker').on('click', function(){
+//            kuname = this.title;
+//            $.ajax({
+//                url: basepath+'/map/ajaxtest',
+//                data:{ kuname: kuname },
+//                success: function(result){
+//                    $('.modal-body').html(result);
+//                }
+//            });
+//            $('#exampleModal').modal('toggle');
 //        });
+//    });
 //
-//    })
-//})
+$(function(){
+    $('.marker').on('click', function(){
+        var kuname = this.title;
+        var x = map.getOverlays();
+        x.clear();
+        $.ajax({
+            url: basepath+'/map/kuPoints',
+            data: { kuname: kuname},
+            success: function(points){
+                alert(points);
+            }
+        });
+
+    })
+})
