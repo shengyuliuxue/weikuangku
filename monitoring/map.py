@@ -1,12 +1,14 @@
+# -*- coding:utf-8 -*-
 from flask import Blueprint, render_template, request
 import pymysql.cursors
+import json
 
 bp = Blueprint('/map', __name__, url_prefix='/map')
 
 def dataConnect(query):
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='shengyu1987',
+                                 password='sy741852963',
                                  db='mydb',
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -50,6 +52,8 @@ def status():
 @bp.route('/kuPoints', methods=('GET', 'POST'))
 def kuPoints():
     kuname = request.args.get('kuname')
-    query = 'select * from diandata'
-    result = dataConnect(query)
-    return result
+    query = 'select * from diandata where latitude is not null and longitude is not null'
+    resultlist = dataConnect(query)
+    jsondata = json.dumps(resultlist, ensure_ascii=False)
+    print(jsondata)
+    return jsondata

@@ -118,6 +118,29 @@
 //        });
 //    });
 //
+
+function loadPointData(points){
+    var jsonarray = $.parseJSON(points);
+    var coordinatesPolygon = new Array();
+
+    for(var i=0; i<jsonarray.length; i++){
+       var pointnow = jsonarray[i];
+       var long = pointnow.longitude;
+       var lat = pointnow.latitude;
+       var name = pointnow.dianName;
+       addPoint(long, lat, name);
+
+      coordinatesPolygon.push([long, lat]);
+
+    }
+
+    var polygon = new ol.geom.Polygon([coordinatesPolygon]);
+    polygon.applyTransform(ol.proj.getTransform('EPSG:4326', 'EPSG:3857'));
+    map.getView().fit(polygon, map.getSize());
+
+}
+
+
 $(function(){
     $('.marker').on('click', function(){
         var kuname = this.title;
@@ -127,7 +150,7 @@ $(function(){
             url: basepath+'/map/kuPoints',
             data: { kuname: kuname},
             success: function(points){
-                alert(points);
+                loadPointData(points);
             }
         });
 
