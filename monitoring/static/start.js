@@ -170,6 +170,7 @@ function loadPointData(points){
        var name = pointnow.dianName;
        loadMultiPoint(long, lat, name);
 
+
       coordinatesPolygon.push([long, lat]);
 
     }
@@ -191,15 +192,21 @@ $(function(){
             data: { kuname: kuname},
             success: function(points){
                 loadPointData(points);
+                $('.pointmarker').on('click', function(){
+
+                    $.ajax({
+                        url: basepath+'/map/ajaxtest',
+                        data:{ kuname: kuname },
+                        success: function(result){
+                        $('.modal-body').html(result);
+                        }
+                    });
+                    $('#exampleModal').modal('toggle');
+
+                })
             }
         });
-
     })
 })
 
 
-$(function(){
-    $('.pointmarker').on('click', function(){
-        alert('point');
-    })
-})

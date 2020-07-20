@@ -55,5 +55,4 @@ def kuPoints():
     query = 'select * from diandata where latitude is not null and longitude is not null'
     resultlist = dataConnect(query)
     jsondata = json.dumps(resultlist, ensure_ascii=False)
-    print(jsondata)
     return jsondata
