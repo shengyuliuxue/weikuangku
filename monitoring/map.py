@@ -8,7 +8,7 @@ bp = Blueprint('/map', __name__, url_prefix='/map')
 def dataConnect(query):
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='sy741852963',
+                                 password='shengyu1987',
                                  db='mydb',
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)

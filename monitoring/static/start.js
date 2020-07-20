@@ -74,6 +74,46 @@
 
     }
 
+
+ function loadMultiPoint(long, lat, name){
+
+        var point = ol.proj.fromLonLat([long, lat]);
+        //新增div元素
+        var elementDiv = document.createElement('div');
+        elementDiv.className = 'pointmarker';
+        elementDiv.title = name;
+        var overlay = document.getElementById('pointlabel');
+        overlay.appendChild(elementDiv);
+        //设置a元素
+        var elementA = document.createElement("a");
+        elementA.className = "pointaddress";
+        elementA.href = '#';
+
+
+        elementA.innerText = elementDiv.title;
+
+        elementDiv.appendChild(elementA);
+
+        var newMarker = new ol.Overlay({
+            position: point,
+            positioning:'center-center',
+            element: elementDiv,
+            stopEvent:false
+        });
+        map.addOverlay(newMarker);
+        newMarker.getElement().title= name;
+
+        var newText = new ol.Overlay({
+            position: point,
+            element: elementA
+        });
+        map.addOverlay(newText);
+
+
+    }
+
+
+
     //addPoint(110.017,34.2352,'王家坪尾矿库');
     addPoint(107.523, 23.4087,'一期尾矿库');
     addPoint(112.39, 33.9827,'泉水沟尾矿库');
@@ -128,7 +168,7 @@ function loadPointData(points){
        var long = pointnow.longitude;
        var lat = pointnow.latitude;
        var name = pointnow.dianName;
-       addPoint(long, lat, name);
+       loadMultiPoint(long, lat, name);
 
       coordinatesPolygon.push([long, lat]);
 
