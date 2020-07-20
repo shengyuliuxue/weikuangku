@@ -196,3 +196,10 @@ $(function(){
 
     })
 })
+
+
+$(function(){
+    $('.pointmarker').on('click', function(){
+        alert('point');
+    })
+})
