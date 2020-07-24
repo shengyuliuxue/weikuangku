@@ -182,6 +182,18 @@ function loadPointData(points){
 }
 
 
+function pointclicked(){
+     $.ajax({
+         url: basepath+'/map/ajaxtest',
+         data:{ kuname: '王家坪尾矿库' },
+         success: function(result){
+              $('.modal-body').html(result);
+          }
+         });
+    $('#exampleModal').modal('toggle');
+}
+
+
 $(function(){
     $('.marker').on('click', function(){
         var kuname = this.title;
@@ -193,16 +205,7 @@ $(function(){
             success: function(points){
                 loadPointData(points);
                 $('.pointmarker').on('click', function(){
-
-                    $.ajax({
-                        url: basepath+'/map/ajaxtest',
-                        data:{ kuname: kuname },
-                        success: function(result){
-                        $('.modal-body').html(result);
-                        }
-                    });
-                    $('#exampleModal').modal('toggle');
-
+                    pointclicked();
                 })
             }
         });

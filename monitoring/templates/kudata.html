@@ -1,44 +1,32 @@
 <div id="kudata">
     <div class="main">
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#jiance">监测数据</a></li>
-            <li><a data-toggle="tab" href="#shixu">时序曲线</a></li>
-            <li><a data-toggle="tab" href="#diejia">叠加曲线</a></li>
-            <li><a data-toggle="tab" href="#shuju">数据对比</a></li>
-            <li><a data-toggle="tab" href="#yujinglishi">预警历史</a></li>
-            <li><a data-toggle="tab" href="#yuzhi">预警阈值</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <div id="jiance" class="tab-pane fade in active">
-                <h3>监测数据标题</h3>
-                <p>监测数据内容</p>
-            </div>
-            <div id="shixu" class="tab-pane fade">
-                <h3>时序曲线标题</h3>
-                <p>时序曲线内容</p>
-            </div>
-            <div id="diejia" class="tab-pane fade">
-                <h3>叠加曲线</h3>
-                <p>叠加曲线内容</p>
-            </div>
-            <div id="shuju" class="tab-pane fade">
-                <h3>数据对比</h3>
-                <p>数据对比内容</p>
-            </div>
-            <div id="yujinglishi" class="tab-pane fade">
-                <h3>预警历史</h3>
-                <p>预警历史数据</p>
-            </div>
-            <div id="yuzhi" class="tab-pane fade">
-                <h3>预警阈值</h3>
-                <p>预警阈值内容</p>
-            </div>
-        </div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="jiance-tab" data-toggle="tab" href="#jiance" role="tab" aria-controls="jiance" aria-selected="true">监测数据</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="shixu-tab" data-toggle="tab" href="#shixu" role="tab" aria-controls="shixu" aria-selected="false">时序曲线</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="diejia-tab" data-toggle="tab" href="#diejia" role="tab" aria-controls="diejia" aria-selected="false">叠加曲线</a>
+  </li>
+    <li class="nav-item" role="presentation">
+    <a class="nav-link" id="shuju-tab" data-toggle="tab" href="#shuju" role="tab" aria-controls="shuju" aria-selected="false">数据对比</a>
+  </li>
+    <li class="nav-item" role="presentation">
+    <a class="nav-link" id="yujing-tab" data-toggle="tab" href="#yujing" role="tab" aria-controls="yujing" aria-selected="false">预警历史</a>
+  </li>
+    <li class="nav-item" role="presentation">
+    <a class="nav-link" id="yuzhi-tab" data-toggle="tab" href="#yuzhi" role="tab" aria-controls="yuzhi" aria-selected="false">预警阈值</a>
+    </li>
+</ul>
 
-        <div class="custom-container">
-            <table class="table">
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane fade show active" id="jiance" role="tabpanel" aria-labelledby="home-tab">
+      <table class="table">
             <thead>
             <tr>
                 <th>监测点编号</th>
@@ -62,6 +50,16 @@
                 {% endfor %}
             </tbody>
         </table>
-        </div>
+  </div>
+
+  <div class="tab-pane fade" id="shixu" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="diejia" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    <div class="tab-pane fade" id="shuju" role="tabpanel" aria-labelledby="contact-tab">...</div>
+     <div class="tab-pane fade" id="yujing" role="tabpanel" aria-labelledby="contact-tab">...</div>
+     <div class="tab-pane fade" id="yuzhi" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
+
+
+
     </div>
 </div>
