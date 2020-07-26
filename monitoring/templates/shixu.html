@@ -1,0 +1,28 @@
+<div id="shixu" class="shixu">
+    <div id="waterdata" style="width:600px; height:400px;"></div>
+    <script>
+    var mychart = echarts.init(document.getElementById('waterdata'));
+    $.get('http://127.0.0.1:5000/map/waterdata', function(data){
+
+    mychart.setOption(option={
+        title:{
+            text: '监测值'
+        },
+        tooltip: {},
+        legend: {
+            data:['库水位']
+        },
+        xAxis:{
+            data: data.monitoringTime
+        },
+        yAxis: {},
+        series:[{
+            name: '库水位',
+            type: 'line',
+            data: data.waterElevation
+        }]
+    });
+    });
+
+    </script>
+</div>
