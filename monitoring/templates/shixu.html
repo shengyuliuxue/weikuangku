@@ -2,9 +2,23 @@
     <div id="waterdata" style="width:600px; height:400px;"></div>
     <script>
     var mychart = echarts.init(document.getElementById('waterdata'));
-    $.get('http://127.0.0.1:5000/map/waterdata', function(data){
 
-    mychart.setOption(option={
+    $.ajax({
+        type: "get",
+        url:"http://127.0.0.1:5000/map/waterdata",
+        success: function(result){
+            result = $.parseJSON(result);
+            var waterdate=[];
+            var rain=[];
+            for( var i=0; i<result.length; i++){
+                waterdate.push(result[i].monitoringTime);
+            }
+            for( var i=0; i<result.length; i++){
+                rain.push(result[i].waterElevation);
+            }
+            mychart.hideLoading();
+
+        mychart.setOption(option={
         title:{
             text: '监测值'
         },
@@ -13,16 +27,22 @@
             data:['库水位']
         },
         xAxis:{
-            data: data.monitoringTime
+            data: waterdate
         },
-        yAxis: {},
+        yAxis: {
+            min:1076.0,
+            max:1077.0
+        },
         series:[{
             name: '库水位',
             type: 'line',
-            data: data.waterElevation
+            data: rain
         }]
     });
+
+        }
     });
+
 
     </script>
 </div>
